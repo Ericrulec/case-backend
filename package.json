@@ -1,0 +1,14 @@
+{
+  "name": "backend_validator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Erik Jensson",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.22.2"
+  }
+}
