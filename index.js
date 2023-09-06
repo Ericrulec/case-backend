@@ -1,6 +1,7 @@
-import fastify from "fastify";
+import Fastify from "fastify";
+import routes from "./routers/schemaRouter";
 
-const server = fastify({
+const fastify = Fastify({
   ajv: {
     customOptions: {
       removeAdditional: "all",
@@ -9,25 +10,37 @@ const server = fastify({
     },
   },
   logger: {
-    level: process.env.LOG_LEVEL,
+    level: process.env.LOG_LEVEL || 3,
   },
+});
+
+fastify.addSchema({
+  $id: "createUseSchema",
+  type: "object",
+  required: ["name"],
+  properties: {
+    name: {
+      type: "string",
+    },
+  },
+});
+
+fastify.register(routes, { prefix: "/" });
+
+const PORT = process.env.PORT;
+const HOST = process.env.HOST || "localhost";
+
+fastify.listen({ host: HOST, port: PORT }, (err) => {
+  if (err) throw err;
 });
 
 process.on("unhandledRejection", (err) => {
   console.error(err);
   process.exit(1);
 });
-
-const PORT = 8080;
-const HOST = process.env.HOST || "localhost";
-
-server.listen({ host: HOST, port: PORT }, (err) => {
-  if (err) throw err;
-});
-
 for (const signal of ["SIGINT", "SIGTERM"]) {
   process.on(signal, () =>
-    server.close().then((err) => {
+    fastify.close().then((err) => {
       console.log(`close application on ${signal}`);
       process.exit(err ? 1 : 0);
     })
