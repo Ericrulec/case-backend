@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
 import Fastify from "fastify";
-import routes from "./routers/schemaRouter";
 
+// Fastify instance initialized
 const fastify = Fastify({
   ajv: {
     customOptions: {
@@ -10,23 +12,21 @@ const fastify = Fastify({
     },
   },
   logger: {
-    level: process.env.LOG_LEVEL || 3,
-  },
-});
-
-fastify.addSchema({
-  $id: "createUseSchema",
-  type: "object",
-  required: ["name"],
-  properties: {
-    name: {
-      type: "string",
+    transport: {
+      target: "pino-pretty",
     },
   },
 });
 
+// Routes
+import routes from "./routers/schemaRouter.js";
 fastify.register(routes, { prefix: "/" });
 
+// Add Static schemas
+import { norwegianschema } from "./schemas/baseSchema.js";
+fastify.addSchema(norwegianschema);
+
+// Server error handling and startup
 const PORT = process.env.PORT;
 const HOST = process.env.HOST || "localhost";
 
