@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-escape */
 
 // Schema validation targeting a norwegian citizen, i.e. norwegian zipcode/city/number
-export const norwegianschema = {
-  $id: "norwegianSchema",
+export const somesite_schema = {
+  $id: "somesite_schema",
   type: "object",
   required: ["name", "address", "zipcode", "city", "country", "tlf", "email"],
   properties: {

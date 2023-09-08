@@ -41,8 +41,8 @@ import routes from "./routers/schemaRouter.js";
 fastify.register(routes, { prefix: "/" });
 
 // Add Static schemas
-import { norwegianschema } from "./schemas/baseSchema.js";
-fastify.addSchema(norwegianschema);
+import { somesite_schema } from "./schemas/baseSchema.js";
+fastify.addSchema(somesite_schema);
 
 // Server error handling and startup
 const PORT = process.env.PORT;

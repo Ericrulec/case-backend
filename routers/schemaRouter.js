@@ -1,7 +1,6 @@
 async function routes(fastify, options) {
   const schema = {
-    body: { $ref: "norwegianSchema#" },
-    }
+    body: { $ref: "somesite_schema#" },
   };
 
   fastify.post("/submit", {
