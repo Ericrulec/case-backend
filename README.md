@@ -60,7 +60,7 @@ The Request body is first validated against the _JSON schema_. Afterwards we che
 
 ## Next
 
-Many steps have been made to prevent unwanted forms, none the less the protection against spam is subpar at best. Most targeted spam bots are sophisticated enough to bypass the restrictions this app employs. Below are further examples.
+Many steps have been made to prevent unwanted forms, none the less the protection against spam is subpar at best. Most targeted spam bots are sophisticated enough to bypass the restrictions this app employs. Below are further examples to limit spam.
 
 - Further steps to prevent spam:
   - Enable Recaptcha
