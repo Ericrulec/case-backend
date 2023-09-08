@@ -33,7 +33,7 @@ export const norwegianschema = {
     },
     tlf: {
       type: "string",
-      pattern: "/^(0047|\+47|47)?[2-9]\d{7}$/",
+      pattern: "^(0047|\\+47|47)?[2-9]\\d{7}$",
       minLength: 8,
       maxLength: 8,
     },
@@ -44,5 +44,6 @@ export const norwegianschema = {
       minLength: 6,
       maxLength: 127,
     },
+    honeypot: {},
   },
 };

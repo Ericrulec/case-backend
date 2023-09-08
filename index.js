@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import Fastify from "fastify";
+import fs from "fs";
 
 // Fastify instance initialized
 const fastify = Fastify({
@@ -16,6 +17,23 @@ const fastify = Fastify({
       target: "pino-pretty",
     },
   },
+});
+
+// Share zipcode validation data via preHandler Hook
+const postnummer = fs.readFileSync(
+  "./data/Postnummerregister-ansi.txt",
+  "utf8"
+);
+let zipcode_data = new Map();
+postnummer.split("\n").map((line) => {
+  const [zipcode, city] = line.split("\t");
+  zipcode_data.set(zipcode, city);
+});
+// decorateRequest will add the key to the request prototype
+fastify.decorateRequest("zipcode_data", "");
+fastify.addHook("preHandler", (request, reply, next) => {
+  request.zipcode_data = zipcode_data;
+  next();
 });
 
 // Routes
