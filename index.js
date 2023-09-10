@@ -44,8 +44,7 @@ fastify.register(routes, { prefix: "/" });
 import { somesite_schema } from "./schemas/baseSchema.js";
 fastify.addSchema(somesite_schema);
 
-// Server error handling and startup
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
 
 fastify.listen({ host: HOST, port: PORT }, (err) => {
@@ -56,6 +55,8 @@ process.on("unhandledRejection", (err) => {
   console.error(err);
   process.exit(1);
 });
+
+// Graceful shutdown
 for (const signal of ["SIGINT", "SIGTERM"]) {
   process.on(signal, () =>
     fastify.close().then((err) => {

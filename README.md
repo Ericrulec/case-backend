@@ -71,6 +71,15 @@ The Request body is first validated against the _JSON schema_. Afterwards we che
   }
   ```
 
+### Testing
+
+_Curl example with correct information_
+
+```
+curl -X POST http://localhost:3000/submit -H "content-type:application/json" \
+     -d '{"name": "Erik", "address": "Plassen", "zipcode": "0001", "city": "Oslo", "country": "Norway", "tlf": "88888888", "email": "erik.email@gmail.com", "honeypot": ""}'
+```
+
 ## Next
 
 Many steps have been made to prevent unwanted forms, unfortunately the protection against spam is subpar at best. Most targeted spam bots are sophisticated enough to bypass the restrictions this app employs. Below are further examples to limit spam.
